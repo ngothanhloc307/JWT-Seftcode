@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("/account")
+@RequestMapping("/admin")
 public class AdminController {
 
     @GetMapping("/index")
