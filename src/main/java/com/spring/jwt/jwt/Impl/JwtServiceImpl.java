@@ -86,7 +86,7 @@ public class JwtServiceImpl implements JwtService {
 
 
     private <T> T extractClaims(String token, Function<Claims, T> claimsTFunction) {
-        final Claims claims = extractClaims(token);
+        final Claims claims = extractAllClaims(token);
         return claimsTFunction.apply(claims);
     }
 
@@ -105,7 +105,7 @@ public class JwtServiceImpl implements JwtService {
                     .parseClaimsJws(token)
                     .getBody();
 
-        } catch (ExpressionException e) {
+        } catch (ExpiredJwtException e) {
             throw new BaseException(String.valueOf(HttpStatus.UNAUTHORIZED.value()), "Token expiration");
         } catch (UnsupportedJwtException e) {
             throw new BaseException(String.valueOf(HttpStatus.UNAUTHORIZED.value()), "Token is not support");
